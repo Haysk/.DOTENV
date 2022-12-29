@@ -11,13 +11,19 @@ return require('packer').startup(function(use)
 		-- or                            , branch = '0.1.x',
 		requires = { { 'nvim-lua/plenary.nvim' } }
 	}
-	use({
-		'rose-pine/neovim',
-		as = 'rose-pine',
+	--	use({
+	--		'rose-pine/neovim',
+	--		as = 'rose-pine',
+	--		config = function()
+	--			vim.cmd('colorscheme rose-pine')
+	--		end
+	--	})
+	use { "rebelot/kanagawa.nvim",
+		as = "kanagawa",
 		config = function()
-			vim.cmd('colorscheme rose-pine')
+			vim.cmd('colorscheme kanagawa')
 		end
-	})
+	}
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 	use('nvim-treesitter/playground')
 	use('theprimeagen/harpoon')
@@ -49,5 +55,29 @@ return require('packer').startup(function(use)
 		requires = { 'kyazdani42/nvim-web-devicons',
 			opt = true }
 	}
-	use('numToStr/FTerm.nvim')
+	use({
+		"folke/persistence.nvim",
+		event = "BufReadPre", -- this will only start session saving when an actual file was opened
+		module = "persistence",
+		config = function()
+			require("persistence").setup()
+		end,
+	})
+	use "qpkorr/vim-bufkill"
+	use {
+		'nvim-tree/nvim-tree.lua',
+		requires = {
+			'nvim-tree/nvim-web-devicons', -- optional, for file icons
+		},
+		tag = 'nightly' -- optional, updated every week. (see issue #1193)
+	}
+	use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+		require("toggleterm").setup()
+	end }
+	use {
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup()
+		end
+	}
 end)
