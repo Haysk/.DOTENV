@@ -72,7 +72,7 @@ require("nvim-tree").setup({
 	actions = {
 		change_dir = {
 			enable = true,
-			global = false,
+			global = true,
 			restrict_above_cwd = false,
 		},
 		file_popup = {
